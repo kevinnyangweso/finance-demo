@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.5.6</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.kevin</groupId>
+	<artifactId>finance-demo</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>finance-demo</name>
+	<description>An application to help users manage their money by keeping track of income and expenditure. </description>
+	<url/>
+	<licenses>
+		<license/>
+	</licenses>
+	<developers>
+		<developer/>
+	</developers>
+	<scm>
+		<connection/>
+		<developerConnection/>
+		<tag/>
+		<url/>
+	</scm>
+	<properties>
+		<java.version>21</java.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<!--
+             DEPENDENCY for autoconfiguration and default dependencies.
+             It includes logging, core Spring framework, and other essential components.
+            -->
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+
+			<!--
+            DEPENDENCY EXCLUSIONS SECTION
+            This block removes specific transitive dependencies that are brought in
+            by spring-boot-starter, but we want to exclude for security or functionality
+            reasons.
+            -->
+			<exclusions>
+				<!--
+                EXCLUSION 1: JANINO DEPENDENCY
+                Removes the Janino library to mitigate CVE-2025-11226 vulnerability.
+
+                Why exclude Janino?
+                - Janino is a Java compiler library used by Logback for conditional processing
+                - The vulnerability (CVE-2025-11226) affects Logback configuration processing
+                  when used with Spring Framework and Janino
+                - By removing Janino, we break the vulnerability chain even though we don't have
+                  a logback.xml file, providing defense in depth
+                -->
+				<exclusion>
+					<groupId>org.codehaus.janino</groupId>
+					<artifactId>janino</artifactId>
+				</exclusion>
+
+				<!--
+                EXCLUSION 2: SPRING BOOT STARTER LOGGING
+                Removes the default Logback logging implementation that comes with Spring Boot.
+
+                Why exclude starter-logging?
+                - This removes the entire Logback logging framework (logback-classic, logback-core)
+                - Since we're excluding Janino due to security concerns, we also remove Logback
+                  to completely eliminate the vulnerable component combination
+                - After this exclusion, you'll need to provide an alternative logging implementation
+                  like Log4j2 or use the default JDK logging
+                -->
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- dependency for: REST API capabilities, embedded server,
+         spring MVC framework -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<!-- dependency for: data persistence, entity management -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<!-- dependency for: bean(jakarta) validation -
+          enforcing constraints-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+
+		<!-- PostgreSQL Driver -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- dependency for: testing capabilities: JUnit 5, Mockito,
+         AssertJ, JSONPath, Spring Test-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- used for logging debug statements -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+
+			<!-- responsible for: packaging: creates executable JAR,
+            Run application directly, build optimization -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>
