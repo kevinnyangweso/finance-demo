@@ -65,8 +65,8 @@ GRANT ALL PRIVILEGES ON DATABASE finance_demo TO finance_user;
 3. Configuration - src/main/resources/application.properties 
 
 # Database Configuration
-spring.datasource.url=jdbc:postgresql://localhost:5432/finance_demo
-spring.datasource.username=finance_user
+spring.datasource.url=jdbc:postgresql://localhost:5432/finance_demo_db
+spring.datasource.username=finance_demo_user
 spring.datasource.password=your_password
 
 # JPA Configuration
@@ -87,14 +87,14 @@ jwt.expiration=86400000
 
 # Flyway
 spring.flyway.enabled=true
-spring.flyway.locations=classpath:db/migration
+spring.flyway.locations=classpath:db/migration 
 
-4. Build the application
+Build the application
 
 bash 
 - mvn clean install 
 
-5. Run the Application 
+- Run the Application 
 
 bash
 - mvn spring-boot:run
