@@ -175,9 +175,8 @@ docker-compose up -d
 5. Open a Pull Request
 
 ## License
-This project is currently unlicensed. Please contact the maintainers for 
+This project is currently unlicensed. Please contact me for 
 licensing information.
-Support
 
 ## For support and questions:
 1. Create an issue in the GitHub repository

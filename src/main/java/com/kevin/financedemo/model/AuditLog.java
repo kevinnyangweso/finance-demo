@@ -88,6 +88,6 @@ public class AuditLog {
                 ", oldValue=" + oldValue +
                 ", newValue=" + newValue +
                 ", createdAt" + createdAt +
-                '}'; 
+                '}';
     }
 }
